@@ -44,6 +44,15 @@ dependencies:
   image_cropper: ^8.0.2
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.3.4
+  google_sign_in: ^6.2.1
+  flutter_dotenv: ^5.2.1
+  stability_image_generation: ^0.0.4
+  path_provider: ^2.1.5
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +80,7 @@ flutter:
   assets:
     - assets/images/
     - assets/wallpapers/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

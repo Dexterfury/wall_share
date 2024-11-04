@@ -14,4 +14,23 @@ class Constants {
   static const String isAIGenerated = 'isAIGenerated';
   static const String tags = 'tags';
   static const String name = 'name';
+
+  // user model constants
+  static const String uid = 'uid';
+  static const String email = 'email';
+  static const String profilePic = 'profilePic';
+  static const String profileId = 'profileId';
+  static const String phone = 'phone';
+  static const String aboutMe = 'aboutMe';
+  static const String fcmToken = 'fcmToken';
+  static const String onLine = 'onLine';
+  static const String followers = 'followers';
+  static const String following = 'following';
+  static const String posts = 'posts';
+
+  // firebase collections
+  // users collection
+  static const String usersCollection = 'users';
+  // wallpapers collection
+  static const String wallpapersCollection = 'wallpapers';
 }

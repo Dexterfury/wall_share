@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
+import 'package:wall_share/screens/edit_profile_screen.dart';
 import 'package:wall_share/widgets/follow_button.dart';
 import 'package:wall_share/widgets/main_app_button.dart';
 import 'package:wall_share/widgets/social_details.dart';
@@ -69,6 +70,12 @@ class UserInfoSection extends StatelessWidget {
                 label: 'Edit Profile',
                 onPressed: () {
                   // navigate to edit profile screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditProfileScreen(),
+                    ),
+                  );
                 })
             : FollowButton(uid: uid),
       ],

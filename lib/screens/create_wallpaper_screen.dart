@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:wall_share/providers/authentication_provider.dart';
 import 'package:wall_share/providers/wallpaper_provider.dart';
+import 'package:wall_share/utilities/utilities.dart';
 import 'package:wall_share/widgets/controls_overlay.dart';
 import 'package:wall_share/widgets/main_app_button.dart';
+import 'package:wall_share/widgets/promp_input_field.dart';
 import 'package:wall_share/widgets/wallpaper_placeholder.dart';
 import 'package:wall_share/widgets/wallpaper_preview.dart';
 
@@ -15,9 +20,9 @@ class CreateWallpaperScreen extends StatefulWidget {
 }
 
 class _CreateWallpaperScreenState extends State<CreateWallpaperScreen> {
-  String prompt = '';
+  String _prompt = '';
   bool _isAIMode = true;
-  bool _showControls = false;
+  bool _showControls = true;
 
   // toggle mode
   void _toggleMode() {
@@ -50,6 +55,57 @@ class _CreateWallpaperScreenState extends State<CreateWallpaperScreen> {
     }
   }
 
+  // save wallpaper
+  Future<void> _saveWallpaper({
+    required title,
+    required category,
+  }) async {
+    // auth provider
+    final authProvider = context.read<AuthenticationProvider>();
+
+    // wallpaper provider
+    final wallpaperProvider = context.read<WallpaperProvider>();
+
+    // uid of the current user
+    final uid = authProvider.userModel?.uid;
+
+    // show loading dialog
+    Utilities.showAnimatedDialog(
+      context: context,
+      title: 'Saving Wallpaper',
+      content: const LinearProgressIndicator(),
+    );
+
+    // save wallpaper
+    await wallpaperProvider.saveWallpaperToFirestore(
+      uid: uid!,
+      isAIGenerated: _isAIMode,
+      title: title,
+      category: category,
+      prompt: _isAIMode ? _prompt : '',
+      onCompleted: (message) {
+        // reset the prompt
+        setState(() {
+          _prompt = '';
+        });
+
+        if (context.mounted) {
+          // dismiss loading dialog
+          Navigator.pop(context);
+          // clear wallpaper state
+          wallpaperProvider.clearState();
+
+          //show snackbar that wallpaper was saved
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message),
+            ),
+          );
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final wallpaperProvider = context.watch<WallpaperProvider>();
@@ -80,7 +136,12 @@ class _CreateWallpaperScreenState extends State<CreateWallpaperScreen> {
 
   // build controls overlay
   Widget _buildControlsOverlay() {
-    return ControlsOverlay(isAIMode: _isAIMode);
+    return ControlsOverlay(
+      isAIMode: _isAIMode,
+      onSharePressed: (title, category) {
+        _saveWallpaper(title: title, category: category);
+      },
+    );
   }
 
   // build bottom UI
@@ -98,16 +159,11 @@ class _CreateWallpaperScreenState extends State<CreateWallpaperScreen> {
 
   // build AI mode UI
   Widget _buildAIModeUI() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      // Prompt input
-      TextField(
-        onChanged: (value) => setState(() => prompt = value),
-        decoration: const InputDecoration(
-          hintText: 'Enter a prompt',
-          border: OutlineInputBorder(),
-        ),
-      ),
-    ]);
+    return PrompInputField(
+      onGenerated: (prompt) => setState(() {
+        _prompt = prompt;
+      }),
+    );
   }
 
   // build upload mode UI

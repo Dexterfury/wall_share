@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wall_share/screens/profile_screen.dart';
+import 'package:wall_share/home_screen_widgets/user_info_data.dart';
 
 class HomeAppbar extends StatelessWidget {
   const HomeAppbar({super.key});
@@ -15,20 +15,7 @@ class HomeAppbar extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const Spacer(),
-          InkWell(
-            onTap: () {
-              // navigate to the profile screen
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ProfileScreen(uid: '123')));
-            },
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.grey.shade200,
-              child: const Icon(Icons.person),
-            ),
-          )
+          const UserInfoData(),
         ],
       ),
     );
