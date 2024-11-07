@@ -129,6 +129,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      sha256: "5598aa796bbf4699afd5c67c0f5f6e2ed542afc956884b9cd58c306966efc260"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.7.0"
+  dio_web_adapter:
+    dependency: transitive
+    description:
+      name: dio_web_adapter
+      sha256: "33259a9276d6cea88774a0000cfae0d861003497755969c92faa223108620dc8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -233,6 +249,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.18.1"
+  firebase_database:
+    dependency: transitive
+    description:
+      name: firebase_database
+      sha256: "64f8076912139e83f3db3d853df5bffd4c6150a71ffef393584318efd4883f7c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.1.4"
+  firebase_database_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_database_platform_interface
+      sha256: "750e9076a41bc78ce87b95f9d0548f224e5b0679009f6236bf5cf98884db60dd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.5+44"
+  firebase_database_web:
+    dependency: transitive
+    description:
+      name: firebase_database_web
+      sha256: daf3fbde892ff5f2ea7469eff1ab22b7988fe96b637919fdec6890141eb51023
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.6+2"
+  firebase_pagination:
+    dependency: "direct main"
+    description:
+      name: firebase_pagination
+      sha256: "54cbd01f373b45d019ffa84c5b422d6ca1fc81a2819efe446f01e79c8827b8d3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   firebase_storage:
     dependency: "direct main"
     description:
@@ -361,7 +409,7 @@ packages:
     source: hosted
     version: "0.12.4+2"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: b9c29a161230ee03d3ccf545097fccd9b87a5264228c5d348202e0f0c28f9010
@@ -400,6 +448,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  image_gallery_saver_plus:
+    dependency: "direct main"
+    description:
+      name: image_gallery_saver_plus
+      sha256: "05a5dfd60b0ecd9f990f578f4ff55fe2b6df57a03bb34e3d0963639584d76153"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.5"
   image_picker:
     dependency: "direct main"
     description:
@@ -853,6 +909,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.5"
+  wallpaper_manager_plus:
+    dependency: "direct main"
+    description:
+      name: wallpaper_manager_plus
+      sha256: "5101ec01a74a475f26c09250756a5e91c1fa032a1e2023c08f0cfddd76dd1186"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   web:
     dependency: transitive
     description:

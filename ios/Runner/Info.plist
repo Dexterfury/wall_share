@@ -5,6 +5,8 @@
 
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This permission is to access your photo library</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need permission to save photos and videos to your library for your convenience.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This permission is to access your camera</string>
 	<key>NSMicrophoneUsageDescription</key>

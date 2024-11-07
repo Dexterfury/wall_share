@@ -1,10 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wall_share/home_screen_widgets/floating_searchbar.dart';
 import 'package:wall_share/home_screen_widgets/home_appbar.dart';
 import 'package:wall_share/home_screen_widgets/home_searchbar.dart';
 import 'package:wall_share/home_screen_widgets/top_liked_carousel.dart';
+import 'package:wall_share/home_screen_widgets/user_info_data.dart';
 import 'package:wall_share/models/wallpaper.dart';
+import 'package:wall_share/providers/wallpaper_provider.dart';
 import 'package:wall_share/screens/create_wallpaper_screen.dart';
 import 'package:wall_share/utilities/utilities.dart';
 import 'package:wall_share/widgets/wallpapers_grid.dart';
@@ -20,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String selectedCategory = 'All';
   String searcQuery = '';
   bool _isScrolled = false;
+  Key _paginationKey = UniqueKey();
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -61,6 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return filteredWallpapers;
   }
 
+  // update filters
+  void _updateFilters({String? category, String? search}) {
+    setState(() {
+      if (category != null) selectedCategory = category;
+      if (search != null) searcQuery = search;
+      _paginationKey = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,9 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         opacity: _isScrolled ? 0 : 1,
                         duration: const Duration(milliseconds: 200),
                         child: HomeSearchbar(
-                          onSearch: (value) => setState(() {
-                            searcQuery = value;
-                          }),
+                          onSearch: (value) => _updateFilters(search: value),
                         ),
                       ),
                     ),
@@ -141,13 +152,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             200, // Adjust based on your needs
                         child: ClipRRect(
                           child: WallpapersGrid(
-                              wallpapers:
-                                  getWallpapersByCategory(selectedCategory),
-                              onTap: (wallpaper) {
-                                // navigate to the wallpaper detail screen
-                                Utilities.navigateToWallpaperDetailsScreen(
-                                    context, wallpaper);
-                              }),
+                            query: context
+                                .read<WallpaperProvider>()
+                                .getWallpapersQuery(
+                                  category: selectedCategory,
+                                  searchQuery: searcQuery,
+                                ),
+                            onTap: (wallpaper) {
+                              // navigate to the wallpaper detail screen
+                              Utilities.navigateToWallpaperDetailsScreen(
+                                  context, wallpaper);
+                            },
+                            key: _paginationKey,
+                          ),
                         ),
                       ),
                     ),
@@ -166,11 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     curve: Curves.easeInOut,
                   );
                 },
-                onChanged: (value) {
-                  setState(() {
-                    searcQuery = value;
-                  });
-                },
+                onChanged: (value) => _updateFilters(search: value),
               ),
           ],
         ),
@@ -213,10 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
               label: Text(category),
               selected: selectedCategory == category,
               onSelected: (selected) {
-                setState(() {
-                  selectedCategory = category;
-                  searcQuery = '';
-                });
+                _updateFilters(category: Wallpaper.categories[index]);
               },
             ),
           );

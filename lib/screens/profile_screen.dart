@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wall_share/models/wallpaper.dart';
 import 'package:wall_share/providers/theme_provider.dart';
+import 'package:wall_share/providers/wallpaper_provider.dart';
 import 'package:wall_share/utilities/utilities.dart';
 import 'package:wall_share/widgets/user_info_section.dart';
 import 'package:wall_share/widgets/wallpapers_grid.dart';
@@ -92,13 +93,15 @@ class _ProfileScreenState extends State<ProfileScreen>
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: WallpapersGrid(
-                wallpapers: Wallpaper.wallpapers,
+                query: context
+                    .read<WallpaperProvider>()
+                    .getCurrentUserWallpapersQuery(widget.uid),
+                crossAxisCount: 3,
                 onTap: (wallpaper) {
-                  // navigate to the wallpaper screen
+                  // navigate to the wallpaper detail screen
                   Utilities.navigateToWallpaperDetailsScreen(
                       context, wallpaper);
                 },
-                crossAxisCount: 3,
               ),
             ),
           )

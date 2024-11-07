@@ -5,6 +5,7 @@ import 'package:wall_share/screens/profile_screen.dart';
 import 'package:wall_share/utilities/assets_manager.dart';
 import 'package:wall_share/utilities/utilities.dart';
 import 'package:wall_share/widgets/sign_in_button.dart';
+import 'package:wall_share/widgets/user_image_avatar.dart';
 
 class UserInfoData extends StatelessWidget {
   const UserInfoData({super.key});
@@ -63,10 +64,10 @@ class UserInfoData extends StatelessWidget {
                       });
                     },
                   ),
-            CircleAvatar(
+            UserImageAvatar(
               radius: 20,
-              backgroundColor: Colors.grey.shade200,
-              child: const Icon(Icons.person),
+              imageUrl: imageUrl,
+              isViewOnly: true,
             ),
           ],
         ),

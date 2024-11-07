@@ -135,37 +135,35 @@ class _PrompInputFieldState extends State<PrompInputField> {
                 boxShadow: [
                   BoxShadow(
                     color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.08),
+                        Theme.of(context).colorScheme.primary.withOpacity(0.5),
                     blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    offset: const Offset(0, 5),
                   ),
                 ]),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _promptController,
-                  maxLines: 3,
-                  minLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'describe the wallpaper you want to create...',
-                    hintStyle: TextStyle(
-                        color: Theme.of(context).hintColor.withOpacity(0.6),
-                        fontSize: 15),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
-                    filled: true,
-                    fillColor: Theme.of(context).colorScheme.surface,
-                  ),
+            child: TextField(
+              controller: _promptController,
+              maxLines: 3,
+              minLines: 1,
+              decoration: InputDecoration(
+                hintText: 'describe the wallpaper you want to create...',
+                hintStyle: TextStyle(
+                    color: Theme.of(context).hintColor.withOpacity(0.6),
+                    fontSize: 15),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
                 ),
-              ],
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.surface,
+              ),
             ),
           ),
+
+          const SizedBox(height: 20),
 
           // Generate button
           MainAppButton(

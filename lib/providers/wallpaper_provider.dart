@@ -28,6 +28,8 @@ class WallpaperProvider with ChangeNotifier {
   dynamic get image => _image;
   File? get imageFile => _imageFile;
 
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   // users collection reference
   final CollectionReference _usersCollection =
       FirebaseFirestore.instance.collection(Constants.usersCollection);
@@ -35,6 +37,50 @@ class WallpaperProvider with ChangeNotifier {
   // wallpaer collection reference
   final CollectionReference _wallpapersCollection =
       FirebaseFirestore.instance.collection(Constants.wallpapersCollection);
+
+  // Query for getting wallpapers with basic filtering
+  Query<Map<String, dynamic>> getWallpapersQuery({
+    String category = 'All',
+    String searchQuery = '',
+    String sortBy = Constants.createdAt,
+    bool isDescending = true,
+  }) {
+    Query<Map<String, dynamic>> query =
+        _firestore.collection(Constants.wallpapersCollection);
+
+    // Apply the catergory filter if its not 'All'
+    if (category != 'All') {
+      query = query.where(Constants.category, isEqualTo: category);
+    }
+
+    // Apply search query if its not empty
+    if (searchQuery.isNotEmpty) {
+      // Convert the search query to lowercase for case-insensitive search
+      final searchQueryLower = searchQuery.toLowerCase();
+
+      query = query.where(Constants.tags, arrayContains: searchQueryLower);
+    }
+
+    // Apply sorting
+    query = query.orderBy(sortBy, descending: isDescending);
+
+    return query;
+  }
+
+  // Get current users wallpaper query
+  Query<Map<String, dynamic>> getCurrentUserWallpapersQuery(String uid) {
+    return _firestore
+        .collection(Constants.wallpapersCollection)
+        .where(Constants.creatorId, isEqualTo: uid);
+  }
+
+  // Get most liked wallpapers query top 10
+  Query<Map<String, dynamic>> getMostLikedWallpapersQuery() {
+    return _firestore
+        .collection(Constants.wallpapersCollection)
+        .orderBy(Constants.likes, descending: true)
+        .limit(10);
+  }
 
   // generate wallpaper with AI
   Future<Uint8List> generateWithAI(

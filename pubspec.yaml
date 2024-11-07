@@ -53,6 +53,11 @@ dependencies:
   stability_image_generation: ^0.0.4
   path_provider: ^2.1.5
   uuid: ^4.5.1
+  firebase_pagination: ^4.0.1
+  image_gallery_saver_plus: ^3.0.5
+  wallpaper_manager_plus: ^0.0.3
+  http: ^1.2.2
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:

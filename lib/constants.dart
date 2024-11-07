@@ -33,4 +33,8 @@ class Constants {
   static const String usersCollection = 'users';
   // wallpapers collection
   static const String wallpapersCollection = 'wallpapers';
+
+  // cache manager constants
+  static const String userImageKey = 'userImageKey';
+  static const String wallpaperImageKey = 'wallpaperImageKey';
 }
