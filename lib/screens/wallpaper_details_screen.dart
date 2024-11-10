@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wall_share/models/wallpaper.dart';
+import 'package:wall_share/providers/authentication_provider.dart';
 import 'package:wall_share/widgets/bottom_content.dart';
-import 'package:wall_share/widgets/comment_button.dart';
-import 'package:wall_share/widgets/like_button.dart';
+import 'package:wall_share/social/comment_button.dart';
+import 'package:wall_share/social/like_button.dart';
 import 'package:wall_share/widgets/wallpaper_image.dart';
 
 class WallpaperDetailsScreen extends StatelessWidget {
   const WallpaperDetailsScreen({
     super.key,
     required this.wallpaper,
-    required this.uid,
   });
 
   final Wallpaper wallpaper;
-  final String uid;
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.read<AuthenticationProvider>();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -30,11 +31,11 @@ class WallpaperDetailsScreen extends StatelessWidget {
         actions: [
           LikeButton(
             wallpaperId: wallpaper.wallpaperId,
-            uid: uid,
+            uid: authProvider.isLoggedIn,
           ),
           CommentButton(
             wallpaperId: wallpaper.wallpaperId,
-            uid: uid,
+            uid: authProvider.isLoggedIn,
           ),
         ],
       ),
@@ -56,7 +57,7 @@ class WallpaperDetailsScreen extends StatelessWidget {
           // Bottom content
           BottomContent(
             wallpaper: wallpaper,
-            uid: uid,
+            uid: authProvider.isLoggedIn,
           ),
         ],
       ),

@@ -28,11 +28,20 @@ class Constants {
   static const String following = 'following';
   static const String posts = 'posts';
 
+  static const String likeId = 'likeId';
+  static const String comment = 'comment';
+  static const String parentId = 'parentId';
+  static const String commentId = 'commentId';
+
   // firebase collections
   // users collection
   static const String usersCollection = 'users';
   // wallpapers collection
   static const String wallpapersCollection = 'wallpapers';
+  // Likes collection
+  static const String likesCollection = 'Likes';
+  // Comments collection
+  static const String commentsCollection = 'comments';
 
   // cache manager constants
   static const String userImageKey = 'userImageKey';

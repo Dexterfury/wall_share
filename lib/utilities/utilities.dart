@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:stability_image_generation/stability_image_generation.dart';
@@ -24,14 +22,11 @@ class Utilities {
     BuildContext context,
     Wallpaper wallpaper,
   ) {
-    // TODO: Implement getting uid from provider class
-    final uid = '123';
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => WallpaperDetailsScreen(
           wallpaper: wallpaper,
-          uid: uid,
         ),
       ),
     );

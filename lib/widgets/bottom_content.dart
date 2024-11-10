@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wall_share/models/wallpaper.dart';
+import 'package:wall_share/service/wallpaper_service.dart';
 import 'package:wall_share/widgets/creator_widget.dart';
 import 'package:wall_share/widgets/main_app_button.dart';
 import 'package:wall_share/widgets/prompt_widget.dart';
@@ -50,7 +51,23 @@ class BottomContent extends StatelessWidget {
                 icon: Icons.download_outlined,
                 label: 'Download',
                 onPressed: () {
-                  // TODO implement set wallpaper
+                  if (uid.isEmpty) {
+                    // show a snackbar to notify user to login
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please login to download wallpaper',
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+
+                  WallpaperService.downloadWallpaper(
+                    context: context,
+                    wallpaperUrl: wallpaper.imageUrl,
+                    walllpapeName: wallpaper.name,
+                  );
                 },
               ),
               const SizedBox(height: 8),
@@ -59,7 +76,22 @@ class BottomContent extends StatelessWidget {
                 icon: Icons.image,
                 label: 'Set Wallpaper',
                 onPressed: () {
-                  // TODO implement set wallpaper
+                  if (uid.isEmpty) {
+                    // show a snackbar to notify user to login
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please login to download wallpaper',
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+
+                  WallpaperService.setWallpaper(
+                    context: context,
+                    wallpaperUrl: wallpaper.imageUrl,
+                  );
                 },
                 backgroundColor: Colors.orangeAccent,
                 textColor: Colors.white,
