@@ -5,7 +5,6 @@ import 'package:wall_share/home_screen_widgets/floating_searchbar.dart';
 import 'package:wall_share/home_screen_widgets/home_appbar.dart';
 import 'package:wall_share/home_screen_widgets/home_searchbar.dart';
 import 'package:wall_share/home_screen_widgets/top_liked_carousel.dart';
-import 'package:wall_share/home_screen_widgets/user_info_data.dart';
 import 'package:wall_share/models/wallpaper.dart';
 import 'package:wall_share/providers/wallpaper_provider.dart';
 import 'package:wall_share/screens/create_wallpaper_screen.dart';
